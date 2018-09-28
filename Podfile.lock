@@ -1,0 +1,48 @@
+PODS:
+  - Alamofire (4.7.3)
+  - AlamofireObjectMapper (5.1.0):
+    - Alamofire (~> 4.1)
+    - ObjectMapper (~> 3.3)
+  - Eureka (4.2.0)
+  - ImageRow (3.1.0):
+    - Eureka (~> 4.0)
+  - NVActivityIndicatorView (4.4.0):
+    - NVActivityIndicatorView/Presenter (= 4.4.0)
+  - NVActivityIndicatorView/Presenter (4.4.0)
+  - ObjectMapper (3.3.0)
+  - SwiftyBeaver (1.6.1)
+  - TextFieldEffects (1.4.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.7)
+  - AlamofireObjectMapper (~> 5.0)
+  - Eureka (~> 4.2.0)
+  - ImageRow (~> 3.0)
+  - NVActivityIndicatorView
+  - SwiftyBeaver
+  - TextFieldEffects (~> 1.4.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - AlamofireObjectMapper
+    - Eureka
+    - ImageRow
+    - NVActivityIndicatorView
+    - ObjectMapper
+    - SwiftyBeaver
+    - TextFieldEffects
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  AlamofireObjectMapper: 3395e698901d8b0e6f48b7d0c43bd47875325102
+  Eureka: 0748c7bbb2560130e43c7bfa83e99c98854a1f42
+  ImageRow: 1ea483078bfa3d880a7fc76fdfcddfd5f29a9e6b
+  NVActivityIndicatorView: ec7440a57af2450319d3a4181cca7da6fc127064
+  ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
+  SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
+  TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
+
+PODFILE CHECKSUM: 9b02dfc8f5420d1e60dd5d30f4d66ac1e148c2b7
+
+COCOAPODS: 1.5.3
