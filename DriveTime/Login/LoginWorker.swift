@@ -30,7 +30,6 @@ class LoginWorker {
     func fetchUserData(payload: Login.FetchUserData.Request, completionHandler: @escaping (Login.FetchUserData.Response?, LoginError?) -> Void) {
         
         let reachablity = NetworkReachabilityManager();
-        log.debug("fetching user profile data")
         
         guard let isConnected = reachablity?.isReachable, isConnected != false else {
             completionHandler(nil, .noNetworkConnection)
@@ -51,11 +50,9 @@ class LoginWorker {
             switch result {
                 
             case .success(let responseArray) :
-                log.debug("Response fetched")
                 completionHandler(Login.FetchUserData.Response(userProfile: responseArray), nil)
 
             case .failure(let error) :
-                log.debug(error)
                 completionHandler(nil, .incorrectUsernameOrPassword)
                 
             }

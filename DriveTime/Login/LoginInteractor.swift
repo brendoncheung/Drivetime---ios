@@ -32,30 +32,14 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
         worker?.fetchUserData(payload: request, completionHandler: { [unowned self] (data, errors) in
             
             if let error = errors {
-                switch error {
-                    
-                case .incompleteField :
-                    log.debug("No username or password provided")
-                    self.presenter?.presentFailedLoginDialogue(message: "Please provide username and password")
-                    
-                case .incorrectUsernameOrPassword :
-                    log.debug("Incorrect username or password")
-                    self.presenter?.presentFailedLoginDialogue(message: "Incorrect username or password, please try again")
-                    
-                case .noNetworkConnection :
-                    log.debug("No network is present")
-                    self.presenter?.presentFailedLoginDialogue(message: "No internet connected detected")
-                }
+                log.debug("User profile error while fetching")
+                self.presenter?.presentFailedLoginDialogue(loginError: error)
             }
             
             if let response = data {
                 log.debug("User profile successfully fetched")
                 self.presenter?.presentFetchedResults(response: response)
-                
             }
-            
-
-            
         })
     }
 }

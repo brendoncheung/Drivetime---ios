@@ -11,10 +11,31 @@
 //
 
 import UIKit
+import Alamofire
 
-class SignUpWorker
-{
-  func doSomeWork()
-  {
+class SignUpWorker{
+    
+    private let SIGN_UP_BASE_URL = "https://drivetime.000webhostapp.com/test/add_info.php"
+    
+  func performRegistration(request: SignUp.RegisterNewUser.Request) {
+    
+    let parameters: [String: String] = [
+        "email"         : request.email!,
+        "number"        : request.number!,
+        "password"      : request.password!,
+        "cdl"           : request.cdl!,
+        "city"          : request.city!,
+        "experience"    : request.experience!
+    ]
+    
+    Alamofire.request(SIGN_UP_BASE_URL, method: .post, parameters: parameters, encoding: URLEncoding(), headers: nil).response { (response) in
+        
+        log.debug(response)
+        
+    }
+    
+    
   }
+    
+    
 }

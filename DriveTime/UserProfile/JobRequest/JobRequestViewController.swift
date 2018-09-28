@@ -15,7 +15,7 @@ import NVActivityIndicatorView
 
 protocol JobRequestDisplayLogic: class {
     func displayJobRequests(viewModel: [JobRequest.fetchJobRequest.ViewModel])
-    func displayError(message: String)
+    func displayEmptyJobRequestError(message: String)
     func refreshJobRequestList()
     func displayErrorOnAcceptingJobRequest()
 }
@@ -91,15 +91,20 @@ extension JobRequestViewController: UITableViewDelegate {
 extension JobRequestViewController: JobRequestDisplayLogic {
     
     func refreshJobRequestList() {
-        interactor?.fetchJobRequest(email: email)
+        LoadingScreenUtils.startLoadingScreen(toAnimate: true, loadingScreen: blurrLoadingScreen, loadingIcon: loadingIcon)
+        tableView.reloadData()
+        LoadingScreenUtils.startLoadingScreen(toAnimate: false, loadingScreen: blurrLoadingScreen, loadingIcon: loadingIcon)
+        
     }
     
     func displayErrorOnAcceptingJobRequest() {
         
     }
     
-    
-    func displayError(message: String) {
+    func displayEmptyJobRequestError(message: String) {
+        
+        jobRequestsviewModelData?.removeAll()
+        tableView.reloadData()
         
         let alertController = UIAlertController(title: "Job Requests", message:  message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Okay", style: .default)
@@ -111,8 +116,8 @@ extension JobRequestViewController: JobRequestDisplayLogic {
     }
     
     func displayJobRequests(viewModel: [JobRequest.fetchJobRequest.ViewModel]) {
+        log.debug("Displaying job requests")
         LoadingScreenUtils.startLoadingScreen(toAnimate: false, loadingScreen: blurrLoadingScreen, loadingIcon: loadingIcon)
-        
         jobRequestsviewModelData = viewModel
         refreshController.endRefreshing()
         tableView.reloadData()
@@ -143,14 +148,14 @@ extension JobRequestViewController {
         router.dataStore = interactor
         
         refreshController.attributedTitle = NSAttributedString(string: REFRESH_CONTROL_DESCRIPTION)
-        refreshController.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
+        refreshController.addTarget(self, action: #selector(onPullRefresh), for: .valueChanged)
         
         tableView.addSubview(refreshController)
         tableView.dataSource = self
         tableView.delegate = self
     }
     
-    @objc func onRefresh() {
+    @objc func onPullRefresh() {
         interactor?.fetchJobRequest(email: email)
     }
 }

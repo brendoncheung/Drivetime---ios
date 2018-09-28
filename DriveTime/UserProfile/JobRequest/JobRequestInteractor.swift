@@ -24,27 +24,26 @@ protocol JobRequestDataStore {
 class JobRequestInteractor: JobRequestDataStore, JobRequestBusinessLogic {
     
     var presenter: JobRequestPresentationLogic?
-    var worker: JobRequestWorker?
+    var worker = JobRequestWorker() // Make sure to only have one worker
     
     var fetchedresponse: JobRequest.fetchJobRequest.Response?
     
     func fetchJobRequest(email: String?) {
         
-        let worker = JobRequestWorker()
+        worker = JobRequestWorker()
         worker.fetchJobRequests(email: email) { [unowned self] (response, error) in
             
             if let error = error {
                 
                 switch error {
-                    
-                    // MARK: - The error message should be managed by the presenter
-                
-                case .FailedToFetchJobRequests :
+                case .FailedToFetchEmptyJobRequests :
+                    log.debug("Failed to fetch job requests")
                     self.presenter?.presentJobRequestsError(message: "There are currently no jobs available")
                 }
             }
             
             if let response = response {
+                log.debug("Fetch job requests")
                 self.fetchedresponse = response
                 self.presenter?.presentJobRequests(response: response)
             }
@@ -52,18 +51,11 @@ class JobRequestInteractor: JobRequestDataStore, JobRequestBusinessLogic {
     }
     
     func acceptJobRequest(id: String?, email: String?) {
-        let worker = JobRequestWorker()
+        worker = JobRequestWorker()
         let acceptedResponse = fetchedresponse?.jobResponses?.filter {$0.id == id}
-        let isAcceptedJob =  worker.acceptJobRequest(jobRequestObject: acceptedResponse?.first, email: email)
+        worker.acceptJobRequest(jobRequestObject: acceptedResponse?.first, email: email)
         
-        switch isAcceptedJob {
-            
-        case true:
-            presenter?.presentRefreshJobRequestList()
-        case false:
-            presenter?.presentFailedJobRequestAccept()
-        
-        }
+        fetchJobRequest(email: email)
     }
 }
 

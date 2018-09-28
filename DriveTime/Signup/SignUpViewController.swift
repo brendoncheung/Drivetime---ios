@@ -94,6 +94,13 @@ class SignUpViewController: FormViewController, SignUpDisplayLogic
                     }
             }
             
+            <<< PhoneRow("number") {
+                $0.title = "Phone number"
+                $0.onChange({ (row) in
+                    userForm.number = row.value
+                })
+            }
+            
             <<< IntRow("experience") {
                 $0.title = "Years of experience"
                 $0.onChange({ (row) in

@@ -26,6 +26,8 @@ protocol onLoginSuccessfulDelegate: class {
 
 class LoginViewController: UIViewController, LoginDelegate {
     
+    private let REGISTER_USER_BASE_URL = "https://drivetimepro1.000webhostapp.com/driverRegister.php"
+    
     var viewModelForUserProfile: Login.FetchUserData.ViewModel?
     private var email: String?
     private var password: String?
@@ -79,12 +81,29 @@ class LoginViewController: UIViewController, LoginDelegate {
         setup()
     }
     
+    
+    @IBAction func onRegisterButtonDidTouch(_ sender: Any) {
+        if let url = URL(string: REGISTER_USER_BASE_URL) {
+            UIApplication.shared.open(url, options: [:])
+            
+        }
+    }
+    
     func uisetup() {
         let backgroundImageView = UIImageView(image: UIImage(named: "homebg"))
         backgroundImageView.frame = view.frame
         backgroundImageView.contentMode = .scaleAspectFill
         view.addSubview(backgroundImageView)
         view.sendSubview(toBack: backgroundImageView)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let destinationVC = segue.destination as? onLoginSuccessfulDelegate {
+            
+            userProfileDelegate = destinationVC
+            userProfileDelegate?.onUserProfileDataReady(viewModel: viewModelForUserProfile, email: email, password: password)
+        }
     }
 }
 
@@ -129,36 +148,13 @@ extension LoginViewController: LoginDisplayLogic {
         viewModelForUserProfile = viewModel
         
         LoadingScreenUtils.startLoadingScreen(toAnimate: false, loadingScreen: blurLoadingScreen, loadingIcon: loadingIcon)
-       
+        
         password = loginView.getPassword()
         email = loginView.getUserName()
         
         performSegue(withIdentifier: "userProfile", sender: nil)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let destinationVC = segue.destination as? onLoginSuccessfulDelegate {
-            
-            userProfileDelegate = destinationVC
-            userProfileDelegate?.onUserProfileDataReady(viewModel: viewModelForUserProfile, email: email, password: password)
-
-        }
-    }
 }
-
-// Routing
-
-extension LoginViewController {
-    
-    
-}
-
-
-
-
-
-
 
 
 

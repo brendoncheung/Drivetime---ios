@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol OnUserProfileChangeDidTouch: class {
+    func onUserProfileChangeDidTouch()
+}
+
 class UserProfileView: UIView {
     
     @IBOutlet weak var userName: UILabel!
@@ -15,6 +19,12 @@ class UserProfileView: UIView {
     @IBOutlet weak var userPhone: UILabel!
     @IBOutlet weak var userCity: UILabel!
     @IBOutlet weak var userYear: UILabel!
+    
+    private weak var delegate: OnUserProfileChangeDidTouch?
+    
+    func setDelegate(delegate: OnUserProfileChangeDidTouch) {
+        self.delegate = delegate
+    }
     
     private let NIB_NAME = "UserProfileView"
 
@@ -56,6 +66,10 @@ class UserProfileView: UIView {
     func addCornerRadius(radius: CGFloat) {
         self.layer.cornerRadius = radius
         self.clipsToBounds = true
+    }
+    
+    @IBAction func changeUserProfileOnlineButtonDidTouch(_ sender: Any) {
+        delegate?.onUserProfileChangeDidTouch()
     }
     
 }

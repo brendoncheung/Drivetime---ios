@@ -16,7 +16,6 @@ protocol JobRequestPresentationLogic {
     func presentJobRequests(response: JobRequest.fetchJobRequest.Response)
     func presentJobRequestsError(message: String)
     func presentFailedJobRequestAccept()
-    func presentRefreshJobRequestList()
 }
 
 class JobRequestPresenter: JobRequestPresentationLogic {
@@ -32,12 +31,11 @@ class JobRequestPresenter: JobRequestPresentationLogic {
     }
     
     func presentJobRequestsError(message: String) {
-        viewController?.displayError(message: message)
+        viewController?.displayEmptyJobRequestError(message: message)
     }
     
     func presentJobRequests(response: JobRequest.fetchJobRequest.Response) {
         log.debug("sucessfully fetch job requests")
-        
         
         guard let jobRequests = response.jobResponses else {
             return

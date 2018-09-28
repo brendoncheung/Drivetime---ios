@@ -12,29 +12,24 @@
 
 import UIKit
 
-protocol SignUpBusinessLogic
-{
+protocol SignUpBusinessLogic {
   func performRegistration(request: SignUp.RegisterNewUser.Request)
 }
 
-protocol SignUpDataStore
-{
+protocol SignUpDataStore {
   //var name: String { get set }
 }
 
-class SignUpInteractor: SignUpBusinessLogic, SignUpDataStore
-{
+class SignUpInteractor: SignUpBusinessLogic, SignUpDataStore {
 
     
   var presenter: SignUpPresentationLogic?
   var worker: SignUpWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
   
   func performRegistration(request: SignUp.RegisterNewUser.Request) {
+
     worker = SignUpWorker()
-    worker?.doSomeWork()
+    worker?.performRegistration(request: request)
     
     let response = SignUp.RegisterNewUser.Response()
     presenter?.presentSomething(response: response)

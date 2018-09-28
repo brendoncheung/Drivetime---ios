@@ -15,7 +15,7 @@ import Alamofire
 import AlamofireObjectMapper
 
 enum JobRequestError: Error {
-    case FailedToFetchJobRequests
+    case FailedToFetchEmptyJobRequests
 }
 
 class JobRequestWorker {
@@ -54,18 +54,16 @@ class JobRequestWorker {
                 
                 log.debug("Fetching error: JobRequest")
                 log.debug(error.localizedDescription)
-                completionHandler(nil, .FailedToFetchJobRequests)
+                completionHandler(nil, .FailedToFetchEmptyJobRequests)
                 
             }
         }
     }
     
-    func acceptJobRequest(jobRequestObject: JobResponseDataObject?, email: String?) -> Bool{
-        
-        var isAccepted = false
+    func acceptJobRequest(jobRequestObject: JobResponseDataObject?, email: String?) {
         
         guard let jobRequestObject = jobRequestObject else {
-            return isAccepted
+            return
         }
         
         // MARK: - This needs to be mapped to unoptional dictionary
@@ -81,12 +79,8 @@ class JobRequestWorker {
             "driver_email"      : email!
         ]
         
-
         Alamofire.request(ACCEPT_JOB_REQUEST_BASE_URL, method: .get, parameters: parameters, encoding: URLEncoding(), headers: nil).responseString { (response) in
-            isAccepted = true
         }
-        
-        return isAccepted
  
     }
     

@@ -14,7 +14,7 @@ import UIKit
 
 protocol LoginPresentationLogic {
     func presentFetchedResults(response: Login.FetchUserData.Response)
-    func presentFailedLoginDialogue(message: String)
+    func presentFailedLoginDialogue(loginError: LoginError)
 }
 
 class LoginPresenter: LoginPresentationLogic {
@@ -27,17 +27,30 @@ class LoginPresenter: LoginPresentationLogic {
             return
         }
         
-        // TODO: -
-        // The view model should have to worry about how to convert response to viewmodel
-        // It is the presenter's job, refactor this
         let viewModel = Login.FetchUserData.ViewModel(response: userProfile)
         viewController?.presentSuccessLoginDialog(viewModel: viewModel)
     }
     
-    func presentFailedLoginDialogue(message: String) {
+    func presentFailedLoginDialogue(loginError: LoginError) {
+        
+        var message: String = ""
+        
+        switch loginError {
+            
+        case .incompleteField :
+            log.debug("Please provide username and password")
+            message = "Please provide username and password"
+            
+        case .incorrectUsernameOrPassword :
+            log.debug("Incorrect username or password, please try again")
+            message = "Incorrect username or password, please try again"
+            
+        case .noNetworkConnection :
+            log.debug("No internet connected detected")
+            message = "No internet connected detected"
+        }
         viewController?.presentLoginErrorDialog(error: message)
     }
- 
 }
 
 
