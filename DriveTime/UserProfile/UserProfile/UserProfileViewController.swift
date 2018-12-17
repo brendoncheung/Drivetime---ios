@@ -17,9 +17,12 @@ class UserProfileViewController: UIViewController, OnUserProfileChangeDidTouch {
     @IBOutlet weak var userProfileView: UserProfileView!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         userProfileView.populateUI(viewModel: viewModel!)
         userProfileView.setDelegate(delegate: self)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(pushJobRequestViewController), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +35,7 @@ class UserProfileViewController: UIViewController, OnUserProfileChangeDidTouch {
         }
     }
     
-   
-
+    @objc func pushJobRequestViewController() {
+        tabBarController?.selectedIndex = 1
+    }
 }

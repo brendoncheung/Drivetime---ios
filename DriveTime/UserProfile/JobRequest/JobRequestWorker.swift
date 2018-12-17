@@ -20,7 +20,8 @@ enum JobRequestError: Error {
 
 class JobRequestWorker {
     
-    private let JOB_REQUEST_BASE_URL = "https://drivetimepro1.000webhostapp.com/apps/android/readRequests.php?"
+    // This is the api address for fetch the available jobs
+    private let JOB_REQUEST_BASE_URL = "https://www.prodrivetime.com/driver/driverRequestLoad"
     
     private let ACCEPT_JOB_REQUEST_BASE_URL = "https://drivetimepro1.000webhostapp.com/apps/android/acceptRequests.php?"
     
@@ -35,17 +36,17 @@ class JobRequestWorker {
         let id = 0
         
         let parameter = [
-            "id" : id.toString(),
-            "username" : email
+            "driverEmail" : email
         ]
         
-        Alamofire.request(JOB_REQUEST_BASE_URL, method: .get, parameters: parameter, encoding: URLEncoding(), headers: nil).responseArray { (response: DataResponse<[JobResponseDataObject]>) in
+        Alamofire.request(JOB_REQUEST_BASE_URL, method: .post, parameters: parameter, encoding: URLEncoding(), headers: nil).responseArray { (response: DataResponse<[JobResponseDataObject]>) in
             
             log.debug("Fetching Job Requests...")
             
             switch response.result {
                 
             case .success(let responseArray) :
+                log.debug(response.debugDescription)
                 log.debug("Sucessfully fetch job requests")
                 log.debug("Job request counts: \(responseArray.count)")
                 completionHandler(JobRequest.fetchJobRequest.Response(jobResponses: responseArray), nil)
@@ -60,30 +61,35 @@ class JobRequestWorker {
         }
     }
     
-    func acceptJobRequest(jobRequestObject: JobResponseDataObject?, email: String?) {
+    func acceptJobRequest(jobRequestObject: JobResponseDataObject?, email: String?, onCompletionHandler: @escaping (Bool) -> ()) {
         
         guard let jobRequestObject = jobRequestObject else {
             return
         }
         
+        log.debug("Worker accepting job request")
+        
         // MARK: - This needs to be mapped to unoptional dictionary
         
-        let parameters: [String :String] = [
+        let parameters: [String : String] = [
             
-            "id"                : jobRequestObject.id!,
-            "client_email"      : jobRequestObject.clientEmail!,
-            "client_name"       : jobRequestObject.clientName!,
-            "business"          : jobRequestObject.business!,
-            "details"           : jobRequestObject.detail!,
+            "id"                : jobRequestObject.id!.toString(),
+            "client_email"      : jobRequestObject.businessEmail!,
+            "client_name"       : jobRequestObject.businessName!,
+            "business"          : jobRequestObject.businessName!,
+            "details"           : jobRequestObject.details!,
             "amount_offered"    : jobRequestObject.amountOffered!,
             "driver_email"      : email!
         ]
         
         Alamofire.request(ACCEPT_JOB_REQUEST_BASE_URL, method: .get, parameters: parameters, encoding: URLEncoding(), headers: nil).responseString { (response) in
+            
+            if (response.description.range(of: "SUCCESS") != nil) {
+                onCompletionHandler(true)
+                log.debug("Job successfully accepted")
+            }
         }
- 
     }
-    
 }
 
 extension Int {

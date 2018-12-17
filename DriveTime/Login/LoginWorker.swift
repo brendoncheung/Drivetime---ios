@@ -22,10 +22,10 @@ enum LoginError: Error {
 }
 
 class LoginWorker {
-
-    private let BASE_URL = "https://drivetimepro1.000webhostapp.com/apps/android/loginDriver.php?"
-    private let USERNAME_PARAM = "login_name"
-    private let PASSWORD_PARAM = "login_pass"
+    
+    private let BASE_URL = "https://www.prodrivetime.com/api/mobileApi/mobileDriverLogin"
+    private let USERNAME_PARAM = "email"
+    private let PASSWORD_PARAM = "password"
     
     func fetchUserData(payload: Login.FetchUserData.Request, completionHandler: @escaping (Login.FetchUserData.Response?, LoginError?) -> Void) {
         
@@ -42,23 +42,32 @@ class LoginWorker {
         }
         
         let parameter: [String: String] = [USERNAME_PARAM: email, PASSWORD_PARAM: password]
+        log.debug(parameter)
         
-        Alamofire.request(BASE_URL, method: .post, parameters: parameter, encoding: URLEncoding(), headers: nil).responseArray { (response: DataResponse<[LoginDataObject]>) in
+        Alamofire.request(BASE_URL, method: .post, parameters: parameter, encoding: URLEncoding(), headers: nil).responseObject { (response: DataResponse<LoginDataObject>) in
+            log.debug(response)
             
             let result = response.result
             
             switch result {
                 
-            case .success(let responseArray) :
-                completionHandler(Login.FetchUserData.Response(userProfile: responseArray), nil)
-
+            case .success(let response):
+                log.debug("Login success")
+                completionHandler(Login.FetchUserData.Response(userProfile: response), nil)
+                
             case .failure(let error) :
+                
+                log.debug("Login failed")
+                log.debug(error.localizedDescription)
                 completionHandler(nil, .incorrectUsernameOrPassword)
+                
                 
             }
         }
+        
     }
 }
+
 
 
 

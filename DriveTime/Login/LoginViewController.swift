@@ -12,6 +12,7 @@
 
 import UIKit
 import NVActivityIndicatorView
+import Alamofire
 
 protocol LoginDisplayLogic: class {
     
@@ -55,6 +56,9 @@ class LoginViewController: UIViewController, LoginDelegate {
         loginView.setDelegate(delegate: self)
         setup()
         uisetup()
+        
+        log.debug(UserDefaults.standard.isLoggedIn())
+        
     }
     
     private func setup() {
@@ -151,6 +155,8 @@ extension LoginViewController: LoginDisplayLogic {
         
         password = loginView.getPassword()
         email = loginView.getUserName()
+        
+        UserDefaults.standard.setLoggedIn(value: true)
         
         performSegue(withIdentifier: "userProfile", sender: nil)
     }

@@ -19,6 +19,7 @@ class UserProfileView: UIView {
     @IBOutlet weak var userPhone: UILabel!
     @IBOutlet weak var userCity: UILabel!
     @IBOutlet weak var userYear: UILabel!
+    @IBOutlet weak var loginOnlineToChangeUserProfileButton: UIButton!
     
     private weak var delegate: OnUserProfileChangeDidTouch?
     
@@ -58,9 +59,11 @@ class UserProfileView: UIView {
         ]
         view.frame = bounds
         
+        loginOnlineToChangeUserProfileButton.layer.cornerRadius = 5
+        loginOnlineToChangeUserProfileButton.clipsToBounds = true
+        
         addSubview(view)
         
-        addCornerRadius(radius: 10)
     }
     
     func addCornerRadius(radius: CGFloat) {

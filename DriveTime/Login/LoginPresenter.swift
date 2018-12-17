@@ -23,7 +23,7 @@ class LoginPresenter: LoginPresentationLogic {
     
     func presentFetchedResults(response: Login.FetchUserData.Response) {
         
-        guard let userProfile = response.userProfile.first else {
+        guard let userProfile = response.userProfile else {
             return
         }
         

@@ -12,6 +12,8 @@
 
 import UIKit
 import NVActivityIndicatorView
+import NotificationCenter
+import Alamofire
 
 protocol JobRequestDisplayLogic: class {
     func displayJobRequests(viewModel: [JobRequest.fetchJobRequest.ViewModel])
@@ -46,6 +48,13 @@ class JobRequestViewController: UIViewController {
         setup()
         interactor?.fetchJobRequest(email: email)
         LoadingScreenUtils.startLoadingScreen(toAnimate: true, loadingScreen: blurrLoadingScreen, loadingIcon: loadingIcon)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onPullRefresh), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+        
+        Alamofire.request("https://www.prodrivetime.com/api/driverApi/driverRequestLoad", method: .post, parameters: ["email": "johndoe@anon.com", "password": "testpassword"], encoding: URLEncoding(), headers: nil).response { (data) in
+            print(data)
+        }
+        
     }
 }
 
@@ -94,7 +103,6 @@ extension JobRequestViewController: JobRequestDisplayLogic {
         LoadingScreenUtils.startLoadingScreen(toAnimate: true, loadingScreen: blurrLoadingScreen, loadingIcon: loadingIcon)
         tableView.reloadData()
         LoadingScreenUtils.startLoadingScreen(toAnimate: false, loadingScreen: blurrLoadingScreen, loadingIcon: loadingIcon)
-        
     }
     
     func displayErrorOnAcceptingJobRequest() {
@@ -102,6 +110,8 @@ extension JobRequestViewController: JobRequestDisplayLogic {
     }
     
     func displayEmptyJobRequestError(message: String) {
+        
+        LoadingScreenUtils.startLoadingScreen(toAnimate: false, loadingScreen: blurrLoadingScreen, loadingIcon: loadingIcon)
         
         jobRequestsviewModelData?.removeAll()
         tableView.reloadData()
@@ -127,6 +137,7 @@ extension JobRequestViewController: JobRequestDisplayLogic {
 extension JobRequestViewController: OnAcceptJobRequest {
     func onAcceptJobRequestButtonDidTouch(id: String?) {
         log.debug("On accept job request id touched: \(String(describing: id))")
+        LoadingScreenUtils.startLoadingScreen(toAnimate: true, loadingScreen: blurrLoadingScreen, loadingIcon: loadingIcon)
         interactor?.acceptJobRequest(id: id, email: email)
     }
 }
@@ -156,9 +167,46 @@ extension JobRequestViewController {
     }
     
     @objc func onPullRefresh() {
+        LoadingScreenUtils.startLoadingScreen(toAnimate: true, loadingScreen: blurrLoadingScreen, loadingIcon: loadingIcon)
         interactor?.fetchJobRequest(email: email)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

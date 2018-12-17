@@ -34,11 +34,10 @@ class JobRequestInteractor: JobRequestDataStore, JobRequestBusinessLogic {
         worker.fetchJobRequests(email: email) { [unowned self] (response, error) in
             
             if let error = error {
-                
                 switch error {
                 case .FailedToFetchEmptyJobRequests :
                     log.debug("Failed to fetch job requests")
-                    self.presenter?.presentJobRequestsError(message: "There are currently no jobs available")
+                    self.presenter?.presentJobRequestsError(error: error)
                 }
             }
             
@@ -51,11 +50,16 @@ class JobRequestInteractor: JobRequestDataStore, JobRequestBusinessLogic {
     }
     
     func acceptJobRequest(id: String?, email: String?) {
-        worker = JobRequestWorker()
-        let acceptedResponse = fetchedresponse?.jobResponses?.filter {$0.id == id}
-        worker.acceptJobRequest(jobRequestObject: acceptedResponse?.first, email: email)
+        log.debug("accepting job request")
+        let acceptedResponse = fetchedresponse?.jobResponses?.filter {$0.id?.toString() == id}
         
-        fetchJobRequest(email: email)
+        worker.acceptJobRequest(jobRequestObject: acceptedResponse?.first, email: email) { [unowned self] (isSuccess) in
+            if (isSuccess) {
+                self.fetchJobRequest(email: email)
+            }
+        }
+//        usleep(1000000/2) // sleep for 0.5 sec for backend to catch up
+//        fetchJobRequest(email: email)
     }
 }
 

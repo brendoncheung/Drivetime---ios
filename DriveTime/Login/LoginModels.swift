@@ -22,7 +22,7 @@ struct Login {
         }
         
         struct Response {
-            var userProfile: [LoginDataObject]
+            var userProfile: LoginDataObject?
         }
         
         struct ViewModel {
@@ -40,8 +40,6 @@ struct Login {
                 self.city = response.city
                 self.experience = response.experience
             }
-
-            
         }
     }
 }

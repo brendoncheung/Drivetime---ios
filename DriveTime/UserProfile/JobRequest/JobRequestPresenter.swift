@@ -14,7 +14,7 @@ import UIKit
 
 protocol JobRequestPresentationLogic {
     func presentJobRequests(response: JobRequest.fetchJobRequest.Response)
-    func presentJobRequestsError(message: String)
+    func presentJobRequestsError(error: JobRequestError)
     func presentFailedJobRequestAccept()
 }
 
@@ -30,8 +30,16 @@ class JobRequestPresenter: JobRequestPresentationLogic {
         viewController?.refreshJobRequestList()
     }
     
-    func presentJobRequestsError(message: String) {
-        viewController?.displayEmptyJobRequestError(message: message)
+    func presentJobRequestsError(error: JobRequestError) {
+        
+        var message = ""
+        
+        switch error {
+            
+        case .FailedToFetchEmptyJobRequests :
+            message = "There are currently no new jobs available"
+            viewController?.displayEmptyJobRequestError(message: message)
+        }
     }
     
     func presentJobRequests(response: JobRequest.fetchJobRequest.Response) {
@@ -42,10 +50,16 @@ class JobRequestPresenter: JobRequestPresentationLogic {
         }
         
         let viewModels = jobRequests.map { (data) -> JobRequest.fetchJobRequest.ViewModel in
-            return JobRequest.fetchJobRequest.ViewModel(id: data.id, companyName: data.business, description: data.detail, amountOffered: data.amountOffered)
+            return JobRequest.fetchJobRequest.ViewModel(id: data.id?.toString(), companyName: data.businessName, description: data.details, amountOffered: data.amountOffered)
         }
         
         viewController?.displayJobRequests(viewModel: viewModels)
         
+    }
+}
+
+extension Int {
+    func toString() -> String? {
+        return "\(self)"
     }
 }

@@ -22,6 +22,11 @@ class JobRequestView: UIView {
     @IBOutlet weak var jobRequestCompanyName: UILabel!
     @IBOutlet weak var jobRequestDescription: UITextView!
     @IBOutlet weak var jobRequestAmountOffered: UILabel!
+    @IBOutlet weak var acceptButton: UIButton!
+    
+    @IBOutlet weak var jobRequestDropOffLocation: UILabel!
+    @IBOutlet weak var jobRequestPickUpLocation: UILabel!
+    @IBOutlet weak var jobRequestLoadDescription: UILabel!
     
     @IBAction func jobRequestAcceptButtonDidTouch(_ sender: Any) {
         delegate?.onAcceptJobRequestButtonDidTouch(id: id)
@@ -39,7 +44,6 @@ class JobRequestView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initContentView()
-        
     }
     
     private func initContentView() {
@@ -48,6 +52,9 @@ class JobRequestView: UIView {
         let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
         self.clipsToBounds = true
         
+        acceptButton.layer.cornerRadius = 5
+        acceptButton.clipsToBounds = true
+        
         view.autoresizingMask = [
             .flexibleWidth,
             .flexibleHeight
@@ -55,8 +62,6 @@ class JobRequestView: UIView {
         view.frame = bounds
         
         addSubview(view)
-        
-        addCornerRadius(radius: 10)
     }
     
     func addCornerRadius(radius: CGFloat) {
