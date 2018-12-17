@@ -21,7 +21,7 @@ enum JobRequestError: Error {
 class JobRequestWorker {
     
     // This is the api address for fetch the available jobs
-    private let JOB_REQUEST_BASE_URL = "https://www.prodrivetime.com/driver/driverRequestLoad"
+    private let JOB_REQUEST_BASE_URL = "https://www.prodrivetime.com/api/driverApi/driverRequestLoad.php"
     
     private let ACCEPT_JOB_REQUEST_BASE_URL = "https://drivetimepro1.000webhostapp.com/apps/android/acceptRequests.php?"
     

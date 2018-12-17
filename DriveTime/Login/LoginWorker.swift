@@ -54,7 +54,8 @@ class LoginWorker {
             case .success(let response):
                 log.debug("Login success")
                 completionHandler(Login.FetchUserData.Response(userProfile: response), nil)
-                
+                UserDefaults.standard.saveUserLogin(id: email, password: password)
+                UserDefaults.standard.setLoggedIn(value: true)
             case .failure(let error) :
                 
                 log.debug("Login failed")

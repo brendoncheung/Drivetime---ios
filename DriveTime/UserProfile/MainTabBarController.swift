@@ -9,26 +9,12 @@
 import Foundation
 import UIKit
 
-import Alamofire
-import ObjectMapper
-
-struct JobResponsePayload: Mappable {
-    
-    init?(map: Map) {
-        
-    }
-    
-    var jobRequest: [JobResponseDataObject]?
-    
-    mutating func mapping(map: Map) {
-        jobRequest      <- map["0.value"]
-    }
-}
 
 class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
-        testingParse()
+        let leftButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(handleSignOut))
+        self.navigationItem.leftBarButtonItem = leftButton
     }
     
     func getUserProfileViewController() -> UIViewController? {
@@ -39,43 +25,6 @@ class MainTabBarController: UITabBarController {
         return self.viewControllers?[1]
     }
     
-    
-    func testingParse() {
-        
-        Alamofire.request("https://www.prodrivetime.com/api/driverApi/driverRequestLoad.php", method: .post, parameters: ["driverEmail":"brendon.cheung@Outlook.com"], encoding: URLEncoding(), headers: nil).responseJSON { (json) in
-
-            let data = json.data?.description.data(using: .utf8)
-            log.debug(data)
-//            switch json.result {
-//
-//            case .success(let data):
-//                let jobs = data as! NSArray
-//
-//                log.debug(type(of:jobs.description)) // String
-//                log.debug(jobs.description) // the whole json
-//
-//                let job = JobResponsePayload(JSONString: jobs.description)
-//                log.debug(job)
-//                print(jobs[0]) // returns the first job
-//                log.debug(type(of: jobs[0])) // NSStringObjectArray
-//                //log.debug(data)
-//                log.debug(type(of: data)) // NSArray
-//
-//                guard let jobrequest = data as? [NSArray: NSArray] else {
-//                    return
-//                }
-//
-//                log.debug(jobrequest)
-//
-//            case .failure(let error):
-//
-//                log.debug(error)
-//
-//            }
-        }
-
-        
-    }
 }
 
 extension MainTabBarController: onLoginSuccessfulDelegate {
