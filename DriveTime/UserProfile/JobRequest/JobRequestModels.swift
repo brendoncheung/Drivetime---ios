@@ -33,6 +33,9 @@ struct JobRequest {
         var companyName: String?
         var description: String?
         var amountOffered: String?
+        var dropOffAddress: String?
+        var pickUpAddress: String?
+        var loadDescription: String?
     }
   }
 }

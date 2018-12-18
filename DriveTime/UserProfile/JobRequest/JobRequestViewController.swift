@@ -50,11 +50,6 @@ class JobRequestViewController: UIViewController {
         LoadingScreenUtils.startLoadingScreen(toAnimate: true, loadingScreen: blurrLoadingScreen, loadingIcon: loadingIcon)
         
         NotificationCenter.default.addObserver(self, selector: #selector(onPullRefresh), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
-        
-        Alamofire.request("https://www.prodrivetime.com/api/driverApi/driverRequestLoad", method: .post, parameters: ["email": "johndoe@anon.com", "password": "testpassword"], encoding: URLEncoding(), headers: nil).response { (data) in
-            print(data)
-        }
-        
     }
 }
 
@@ -79,9 +74,13 @@ extension JobRequestViewController: UITableViewDataSource {
         if let viewModels = jobRequestsviewModelData {
             let viewModelAtIndexPath = viewModels[indexPath.row]
             cell.jobRequestCell.jobRequestDescription.text = viewModelAtIndexPath.description
-            cell.jobRequestCell.jobRequestAmountOffered.text = viewModelAtIndexPath.amountOffered
+            cell.jobRequestCell.jobRequestAmountOffered.text = "$ \(viewModelAtIndexPath.amountOffered ?? "0")"
             cell.jobRequestCell.jobRequestCompanyName.text = viewModelAtIndexPath.companyName
             cell.jobRequestCell.id = viewModelAtIndexPath.id
+            
+            cell.jobRequestCell.jobRequestDropOffLocation.text = viewModelAtIndexPath.dropOffAddress
+            cell.jobRequestCell.jobRequestPickUpLocation.text = viewModelAtIndexPath.pickUpAddress
+            cell.jobRequestCell.jobRequestLoadDescription.text = viewModelAtIndexPath.loadDescription
         }
         return cell
     }

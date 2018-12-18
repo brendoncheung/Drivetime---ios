@@ -7,10 +7,17 @@
 //
 
 import Foundation
+import Alamofire
 extension UserDefaults {
     
     func setLoggedIn(value: Bool) {
         UserDefaults.standard.set(value, forKey: "isLoggedIn")
+        
+        if value == false {
+            // This is to destroy the cookie and the session
+            Alamofire.request("https://www.prodrivetime.com/controls/logout.php")
+        }
+        
         synchronize()
         log.debug("\(UserDefaults.standard.bool(forKey: "isLoggedIn"))")
     }

@@ -12,7 +12,8 @@
 
 import UIKit
 import Alamofire
-import AlamofireObjectMapper
+import ObjectMapper
+import Foundation
 
 enum JobRequestError: Error {
     case FailedToFetchEmptyJobRequests
@@ -31,32 +32,29 @@ class JobRequestWorker {
             return
         }
         
-        // This id number only pulls 0 - 1000 job requests, if we need more, we need to iterate at 1000 steps 
-        
-        let id = 0
+        // This id number only pulls 0 - 1000 job requests, if we need more, we need to iterate at 1000 steps
         
         let parameter = [
             "driverEmail" : email
         ]
         
         Alamofire.request(JOB_REQUEST_BASE_URL, method: .post, parameters: parameter, encoding: URLEncoding(), headers: nil).responseArray { (response: DataResponse<[JobResponseDataObject]>) in
-            
+
             log.debug("Fetching Job Requests...")
-            
+
             switch response.result {
-                
+
             case .success(let responseArray) :
                 log.debug(response.debugDescription)
                 log.debug("Sucessfully fetch job requests")
                 log.debug("Job request counts: \(responseArray.count)")
                 completionHandler(JobRequest.fetchJobRequest.Response(jobResponses: responseArray), nil)
-                
+
             case .failure(let error) :
-                
+
                 log.debug("Fetching error: JobRequest")
                 log.debug(error.localizedDescription)
                 completionHandler(nil, .FailedToFetchEmptyJobRequests)
-                
             }
         }
     }

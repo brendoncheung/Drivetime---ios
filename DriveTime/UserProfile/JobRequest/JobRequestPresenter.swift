@@ -50,7 +50,7 @@ class JobRequestPresenter: JobRequestPresentationLogic {
         }
         
         let viewModels = jobRequests.map { (data) -> JobRequest.fetchJobRequest.ViewModel in
-            return JobRequest.fetchJobRequest.ViewModel(id: data.id?.toString(), companyName: data.businessName, description: data.details, amountOffered: data.amountOffered)
+            return JobRequest.fetchJobRequest.ViewModel(id: data.id?.toString(), companyName: data.businessName, description: data.details, amountOffered: data.amountOffered, dropOffAddress: data.dropOffAddress, pickUpAddress: data.pickUpAddress, loadDescription: data.loadDescription)
         }
         
         viewController?.displayJobRequests(viewModel: viewModels)
