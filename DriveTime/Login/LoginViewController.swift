@@ -27,7 +27,7 @@ protocol onLoginSuccessfulDelegate: class {
 
 class LoginViewController: UIViewController, LoginDelegate {
     
-    private let REGISTER_USER_BASE_URL = "https://drivetimepro1.000webhostapp.com/driverRegister.php"
+    private let REGISTER_USER_BASE_URL = "https://prodrivetime.com/controls/chooseLogin"
     
     var viewModelForUserProfile: Login.FetchUserData.ViewModel?
     private var email: String?
