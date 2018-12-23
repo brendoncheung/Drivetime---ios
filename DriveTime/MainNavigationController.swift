@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KeychainSwift
 
 class MainNavigationControllerViewController: UINavigationController, UINavigationControllerDelegate {
     
@@ -14,12 +15,12 @@ class MainNavigationControllerViewController: UINavigationController, UINavigati
         
         super.viewDidLoad()
         
-        if UserDefaults.standard.isLoggedIn() {
+        if KeychainSwift().getBool("isLoggedIn") ?? false {
             
             self.delegate = self
             
-            let saveEmail = UserDefaults.standard.string(forKey: "id")
-            let savePassword = UserDefaults.standard.string(forKey: "password")
+            let saveEmail = KeychainSwift().get("username")
+            let savePassword = KeychainSwift().get("password")
             
             let worker = LoginWorker()
             let request = Login.FetchUserData.Request(email: saveEmail, password: savePassword)
@@ -51,7 +52,6 @@ class MainNavigationControllerViewController: UINavigationController, UINavigati
     }
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        
         viewController.view.resignFirstResponder()
     }
     

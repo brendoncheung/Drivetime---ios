@@ -34,27 +34,4 @@ struct LoginDataObject : Mappable
     var experience: String?
 }
 
-//{
-//    "driver_id": "18940092fj339unfj229",
-//    "name": "Michael Scott",
-//    "email": null,
-//    "phone": "1234567890",
-//    "city": "Brooksdale",
-//    "state": "CA",
-//    "experience": 11
-//}
-
-/*
- 
- JSON map
- 
- Name -> name
- Email -> email
- Phone -> ?
- City -> ?
- Years ->?
- 
- 
-*/
-
 

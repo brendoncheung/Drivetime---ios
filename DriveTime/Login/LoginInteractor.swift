@@ -16,11 +16,7 @@ protocol LoginBusinessLogic {
     func fetchLoginData(request: Login.FetchUserData.Request)
 }
 
-protocol LoginDataStore {
-    //var name: String { get set }
-}
-
-class LoginInteractor: LoginBusinessLogic, LoginDataStore {
+class LoginInteractor: LoginBusinessLogic {
     
     var presenter: LoginPresentationLogic?
     var worker: LoginWorker?
@@ -43,52 +39,6 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
         })
     }
 }
-
-//            let clientName: String
-//            let businessName: String
-//            let clientEmailAddress: String
-//            let driverEmailAddress: String
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

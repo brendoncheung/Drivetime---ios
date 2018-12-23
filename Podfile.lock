@@ -55,6 +55,7 @@ PODS:
     - GoogleUtilities/Logger
   - ImageRow (3.1.0):
     - Eureka (~> 4.0)
+  - KeychainSwift (12.0.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -75,6 +76,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
   - ImageRow (~> 3.0)
+  - KeychainSwift
   - NVActivityIndicatorView
   - SwiftyBeaver
   - TextFieldEffects (~> 1.4.0)
@@ -92,6 +94,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - ImageRow
+    - KeychainSwift
     - nanopb
     - NVActivityIndicatorView
     - ObjectMapper
@@ -111,6 +114,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 7d2552cea4e12d09ce737ef0441887a746585ff3
   GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
   ImageRow: 1ea483078bfa3d880a7fc76fdfcddfd5f29a9e6b
+  KeychainSwift: d5e776578587ee5958ce36601df22f168f65138a
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NVActivityIndicatorView: ec7440a57af2450319d3a4181cca7da6fc127064
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
@@ -118,6 +122,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
 
-PODFILE CHECKSUM: 869c760721ccf2f8ee2bd4c6dafacd06ae052db4
+PODFILE CHECKSUM: 4cfaf803ceaad37d7e386e9ac08aebfd156292af
 
 COCOAPODS: 1.5.3

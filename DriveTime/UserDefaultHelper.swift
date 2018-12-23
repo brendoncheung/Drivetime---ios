@@ -17,7 +17,6 @@ extension UserDefaults {
             // This is to destroy the cookie and the session
             Alamofire.request("https://www.prodrivetime.com/controls/logout.php")
         }
-        
         synchronize()
         log.debug("\(UserDefaults.standard.bool(forKey: "isLoggedIn"))")
     }

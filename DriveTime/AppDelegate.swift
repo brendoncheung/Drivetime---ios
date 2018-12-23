@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
         let token = deviceToken.map {String(format: "%02.2hhx", $0)}.joined()
-        
         log.debug("Token: \(token)")
     }
     
@@ -36,19 +35,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //    }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        log.debug("\(fcmToken)")
+        log.debug("Firebase cloud messaging token: \(fcmToken)")
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        log.debug("Device token receiving failed")
-        log.debug(error.localizedDescription)
+        log.debug("Device token receiving failed because: \(error.localizedDescription)")
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
-        pushNotificationConfiguration()
         loggingCOnfiguration()
+        pushNotificationConfiguration()
         
         return true
     }
@@ -80,23 +77,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("6")
     }
     
-    
     func pushNotificationConfiguration() {
         
         UNUserNotificationCenter.current().delegate = self
         
+        // requesting user's permission to accpet push notification
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             
             if granted == true {
+                log.debug("User granted pn")
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
+            } else {
+                log.debug("User did not grate pn")
             }
         }
         
         Messaging.messaging().delegate = self
         FirebaseApp.configure()
     }
+    
+    // This is the init for swiftyBeaver (logging)
     
     func loggingCOnfiguration() {
         let console = ConsoleDestination()

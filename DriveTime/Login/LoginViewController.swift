@@ -12,7 +12,6 @@
 
 import UIKit
 import NVActivityIndicatorView
-import Alamofire
 
 protocol LoginDisplayLogic: class {
     
@@ -25,9 +24,9 @@ protocol onLoginSuccessfulDelegate: class {
 }
 
 
-class LoginViewController: UIViewController, LoginDelegate {
+class LoginViewController: UIViewController {
     
-    private let REGISTER_USER_BASE_URL = "https://prodrivetime.com/controls/chooseLogin"
+    private let REGISTER_USER_BASE_URL = "https://prodrivetime.com/controls/chooseLogin" // url for webview login
     
     var viewModelForUserProfile: Login.FetchUserData.ViewModel?
     private var email: String?
@@ -41,24 +40,12 @@ class LoginViewController: UIViewController, LoginDelegate {
     
     var interactor: LoginBusinessLogic?
     var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
-    
-    func login(username: String?, password: String?) {
-        
-        //startLoadingScreen(toAnimate: true, loadingScreen: blurLoadingScreen)
-        LoadingScreenUtils.startLoadingScreen(toAnimate: true, loadingScreen: blurLoadingScreen, loadingIcon: loadingIcon)
-        
-        let loginCredential = Login.FetchUserData.Request(email: username, password: password)
-        interactor?.fetchLoginData(request: loginCredential)
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         loginView.setDelegate(delegate: self)
         setup()
         uisetup()
-        
-        log.debug(UserDefaults.standard.isLoggedIn())
-        
     }
     
     private func setup() {
@@ -85,11 +72,10 @@ class LoginViewController: UIViewController, LoginDelegate {
         setup()
     }
     
-    
+    // open safari to login user
     @IBAction func onRegisterButtonDidTouch(_ sender: Any) {
         if let url = URL(string: REGISTER_USER_BASE_URL) {
             UIApplication.shared.open(url, options: [:])
-            
         }
     }
     
@@ -104,7 +90,6 @@ class LoginViewController: UIViewController, LoginDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let destinationVC = segue.destination as? onLoginSuccessfulDelegate {
-            
             userProfileDelegate = destinationVC
             userProfileDelegate?.onUserProfileDataReady(viewModel: viewModelForUserProfile, email: email, password: password)
         }
@@ -137,6 +122,7 @@ extension LoginViewController: UITextFieldDelegate {
 
 extension LoginViewController: LoginDisplayLogic {
     
+    // presenter will call when login is unsuccessful
     func presentLoginErrorDialog(error: String) {
         
         let alertController = UIAlertController(title: "Login", message:  error, preferredStyle: .alert)
@@ -146,6 +132,7 @@ extension LoginViewController: LoginDisplayLogic {
         LoadingScreenUtils.startLoadingScreen(toAnimate: false, loadingScreen: blurLoadingScreen, loadingIcon: loadingIcon)
     }
     
+    // presenter will call when login is successful
     func presentSuccessLoginDialog(viewModel: Login.FetchUserData.ViewModel) {
         
         log.debug("presentSuccessLoginDialog")
@@ -160,6 +147,17 @@ extension LoginViewController: LoginDisplayLogic {
         
         performSegue(withIdentifier: "userProfile", sender: nil)
     }
+}
+
+extension LoginViewController: LoginDelegate {
+    
+    func login(username: String?, password: String?) {
+        LoadingScreenUtils.startLoadingScreen(toAnimate: true, loadingScreen: blurLoadingScreen, loadingIcon: loadingIcon)
+        let loginCredential = Login.FetchUserData.Request(email: username, password: password)
+        interactor?.fetchLoginData(request: loginCredential)
+    }
+    
+    
 }
 
 

@@ -25,6 +25,9 @@ target 'DriveTime' do
   # Firebase for push notification
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
+
+  # iOS Keychain wrapper
+  pod 'KeychainSwift'
   
   post_install do |installer|
       installer.pods_project.build_configurations.each do |config|
