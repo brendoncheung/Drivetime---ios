@@ -267,8 +267,8 @@
 		4B0D3DF4211186F900A9EE07 /* DriveTime */ = {
 			isa = PBXGroup;
 			children = (
-				4B02557021BF5E600041615C /* Fonts */,
 				4B0545BA2182A3C500DC80CF /* GoogleService-Info.plist */,
+				4B02557021BF5E600041615C /* Fonts */,
 				4B35A8EF215EBAC8004B0312 /* DriveTime.entitlements */,
 				4BABFE592158AB080071B797 /* utils */,
 				4BE3304B21513D5600079DA7 /* xib */,

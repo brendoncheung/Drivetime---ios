@@ -18,15 +18,9 @@ import UIKit
     func routeToSignUpForm(segue: UIStoryboardSegue?)
 }
 
-protocol LoginDataPassing
-{
-  var dataStore: LoginDataStore? { get }
-}
-
-class LoginRouter: NSObject, LoginRoutingLogic, LoginDataPassing {
+class LoginRouter: NSObject, LoginRoutingLogic {
     
     weak var viewController: LoginViewController?
-    var dataStore: LoginDataStore?
     
     func routeToSignUpForm(segue: UIStoryboardSegue?) {
         if let segue = segue {

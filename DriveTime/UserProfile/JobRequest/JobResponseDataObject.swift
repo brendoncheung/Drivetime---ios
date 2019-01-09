@@ -47,45 +47,8 @@ struct JobResponseDataObject: Mappable {
     }
 }
 
-//new json response
-//"id": 22,
-//"request_id": "rqst5c12fc9e856ae1.06631647",
-//"business_name": "Code Viable",
-//"business_email": "code@viable.com",
-
-//"title": "Apache Load/Ubuntu",
-//"details": "haul my os",
-//"load_description": "Operating system",
-//"amount_offered": "11",
-
-//"pickup_address": "123",
-//"dropoff_address": "123",
-//"timestamp": "2018-12-14 00:43:10"
 
 
-//job request example json return - OLD
-//
-//    [
-//        {
-//            "id": "280",
-//            "client_email": "client@example.com",
-//            "client_name": "Example Client",
-//            "business": "Clients Business LLC.",
-//            "details": "123",
-//            "amount_offered": "123",
-//            "driveremail": "",
-//            "timestamp": "2018-11-27 05:41:48"
-//        },
-//        {
-//            "id": "281",
-//            "client_email": "client@example.com",
-//            "client_name": "Example Client",
-//            "business": "Clients Business LLC.",
-//            "details": "123",
-//            "amount_offered": "123",
-//            "driveremail": "",
-//            "timestamp": "2018-12-11 01:55:24"
-//        }
-//]
-//
+
+
 

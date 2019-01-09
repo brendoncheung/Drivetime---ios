@@ -24,7 +24,6 @@ class MainTabBarController: UITabBarController {
     func getJobRequestViewController() -> UIViewController? {
         return self.viewControllers?[1]
     }
-    
 }
 
 extension MainTabBarController: onLoginSuccessfulDelegate {

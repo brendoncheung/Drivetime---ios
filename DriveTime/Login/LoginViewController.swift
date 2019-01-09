@@ -39,7 +39,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loadingIcon: NVActivityIndicatorView!
     
     var interactor: LoginBusinessLogic?
-    var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +56,6 @@ class LoginViewController: UIViewController {
         presenter.viewController = self
         router.viewController = self
         viewController.interactor = interactor
-        viewController.router = router
-        router.dataStore = interactor
         
     }
     
