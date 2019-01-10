@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        FirebaseApp.configure()
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
         // Override point for customization after application launch.
         loggingWithSwitftyBeaverConfiguration()
         
@@ -30,21 +34,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             
             if granted == true {
                 log.debug("User granted push notification")
+                UNUserNotificationCenter.current().delegate = self
+                Messaging.messaging().delegate = self
                 DispatchQueue.main.async {
-                    UNUserNotificationCenter.current().delegate = self
-                    Messaging.messaging().delegate = self
                     UIApplication.shared.registerForRemoteNotifications()
                 }
+                
+                
             } else {
-                log.debug("User did not grate pn")
+                log.debug("User did not grant pn")
             }
         }
-        
-        Messaging.messaging().delegate = self
-        FirebaseApp.configure()
-        
+
         return true
     }
+    
+    
+    
+    
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         log.debug("Device token receiving failed because: \(error.localizedDescription)")
@@ -54,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let token = deviceToken.map {String(format: "%02.2hhx", $0)}.joined()
         log.debug("Token: \(token)")
+        Messaging.messaging().setAPNSToken(deviceToken, type: MessagingAPNSTokenType.prod)
     }
     
     
@@ -71,5 +79,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let console = ConsoleDestination()
         log.addDestination(console)
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        Messaging.messaging().shouldEstablishDirectChannel = true
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        Messaging.messaging().shouldEstablishDirectChannel = false
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        UIApplication.shared.applicationIconBadgeNumber += 1
+        
+        print("push notification received")
+
+    }
+    
 }
 

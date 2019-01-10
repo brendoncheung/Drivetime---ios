@@ -43,6 +43,7 @@
 		4B02559E21BF5E8C0041615C /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4B02557C21BF5E8C0041615C /* Roboto-Regular.ttf */; };
 		4B02559F21BF5E8C0041615C /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4B02557C21BF5E8C0041615C /* Roboto-Regular.ttf */; };
 		4B0255A021BF5E8C0041615C /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4B02557C21BF5E8C0041615C /* Roboto-Regular.ttf */; };
+		4B034FC021E6EFBC009D9E91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B034FBF21E6EFBC009D9E91 /* GoogleService-Info.plist */; };
 		4B03744F215A7E1F002A2ABE /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B03744E215A7E1F002A2ABE /* MainTabBarController.swift */; };
 		4B037452215A985A002A2ABE /* JobRequestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B037451215A985A002A2ABE /* JobRequestView.xib */; };
 		4B037454215A987C002A2ABE /* JobRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B037453215A987C002A2ABE /* JobRequestView.swift */; };
@@ -54,7 +55,6 @@
 		4B037466215C0DE1002A2ABE /* JobRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B037464215C0DE1002A2ABE /* JobRequestViewController.swift */; };
 		4B037467215C0DE1002A2ABE /* JobRequestWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B037465215C0DE1002A2ABE /* JobRequestWorker.swift */; };
 		4B037469215C0DE5002A2ABE /* JobResponseDataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B037468215C0DE4002A2ABE /* JobResponseDataObject.swift */; };
-		4B0545BB2182A3C600DC80CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B0545BA2182A3C500DC80CF /* GoogleService-Info.plist */; };
 		4B0545BD2182C0C000DC80CF /* UserDefaultHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0545BC2182C0C000DC80CF /* UserDefaultHelper.swift */; };
 		4B0545BF2182CBAB00DC80CF /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0545BE2182CBAB00DC80CF /* MainNavigationController.swift */; };
 		4B0D3DF6211186F900A9EE07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0D3DF5211186F900A9EE07 /* AppDelegate.swift */; };
@@ -118,6 +118,7 @@
 		4B02557A21BF5E8B0041615C /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		4B02557B21BF5E8C0041615C /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		4B02557C21BF5E8C0041615C /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		4B034FBF21E6EFBC009D9E91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4B03744E215A7E1F002A2ABE /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		4B037451215A985A002A2ABE /* JobRequestView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobRequestView.xib; sourceTree = "<group>"; };
 		4B037453215A987C002A2ABE /* JobRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobRequestView.swift; sourceTree = "<group>"; };
@@ -129,7 +130,6 @@
 		4B037464215C0DE1002A2ABE /* JobRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobRequestViewController.swift; sourceTree = "<group>"; };
 		4B037465215C0DE1002A2ABE /* JobRequestWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobRequestWorker.swift; sourceTree = "<group>"; };
 		4B037468215C0DE4002A2ABE /* JobResponseDataObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobResponseDataObject.swift; sourceTree = "<group>"; };
-		4B0545BA2182A3C500DC80CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4B0545BC2182C0C000DC80CF /* UserDefaultHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHelper.swift; sourceTree = "<group>"; };
 		4B0545BE2182CBAB00DC80CF /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		4B0D3DF2211186F900A9EE07 /* DriveTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DriveTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,7 +267,7 @@
 		4B0D3DF4211186F900A9EE07 /* DriveTime */ = {
 			isa = PBXGroup;
 			children = (
-				4B0545BA2182A3C500DC80CF /* GoogleService-Info.plist */,
+				4B034FBF21E6EFBC009D9E91 /* GoogleService-Info.plist */,
 				4B02557021BF5E600041615C /* Fonts */,
 				4B35A8EF215EBAC8004B0312 /* DriveTime.entitlements */,
 				4BABFE592158AB080071B797 /* utils */,
@@ -524,6 +524,7 @@
 				4B037452215A985A002A2ABE /* JobRequestView.xib in Resources */,
 				4B02559B21BF5E8C0041615C /* Roboto-Italic.ttf in Resources */,
 				4B0D3E00211186FB00A9EE07 /* LaunchScreen.storyboard in Resources */,
+				4B034FC021E6EFBC009D9E91 /* GoogleService-Info.plist in Resources */,
 				4B02558321BF5E8C0041615C /* Roboto-Bold.ttf in Resources */,
 				4B02557D21BF5E8C0041615C /* Roboto-BoldItalic.ttf in Resources */,
 				4B02558C21BF5E8C0041615C /* Roboto-LightItalic.ttf in Resources */,
@@ -539,7 +540,6 @@
 				4B02559E21BF5E8C0041615C /* Roboto-Regular.ttf in Resources */,
 				4B0D3DFB211186F900A9EE07 /* Main.storyboard in Resources */,
 				4B174FC621515A990038355E /* UserProfileView.xib in Resources */,
-				4B0545BB2182A3C600DC80CF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
