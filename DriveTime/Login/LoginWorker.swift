@@ -14,6 +14,7 @@ import UIKit
 import Alamofire
 import AlamofireObjectMapper
 import KeychainSwift
+import FirebaseMessaging
 
 enum LoginError: Error {
     
@@ -27,6 +28,7 @@ class LoginWorker {
     private let BASE_URL = "https://www.prodrivetime.com/api/mobileApi/mobileDriverLogin"
     private let USERNAME_API_PARAM = "email"
     private let PASSWORD_API_PARAM = "password"
+    private let FIREBASE_TOKEN_PARAM = "token"
 
     func fetchUserData(payload: Login.FetchUserData.Request, completionHandler: @escaping (Login.FetchUserData.Response?, LoginError?) -> Void) {
         
@@ -42,8 +44,9 @@ class LoginWorker {
             return
         }
         
-        let parameter: [String: String] = [USERNAME_API_PARAM: email, PASSWORD_API_PARAM: password]
-        log.debug(parameter)
+        guard let token = Messaging.messaging().fcmToken else { return }
+        
+        let parameter: [String: String] = [USERNAME_API_PARAM: email, PASSWORD_API_PARAM: password, FIREBASE_TOKEN_PARAM: token]
         
         Alamofire.request(BASE_URL, method: .post, parameters: parameter, encoding: URLEncoding(), headers: nil).responseObject { (response: DataResponse<LoginDataObject>) in
             log.debug(response)

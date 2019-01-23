@@ -29,8 +29,36 @@ extension UserDefaults {
         UserDefaults.standard.set(id, forKey: "id")
         UserDefaults.standard.set(password, forKey: "password")
         synchronize()
+        
+
     }
+    
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
