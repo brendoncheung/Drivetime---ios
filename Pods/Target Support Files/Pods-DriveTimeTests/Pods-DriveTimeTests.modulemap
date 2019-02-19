@@ -1,0 +1,6 @@
+framework module Pods_DriveTimeTests {
+  umbrella header "Pods-DriveTimeTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

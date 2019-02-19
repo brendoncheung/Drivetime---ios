@@ -1,72 +1,78 @@
 PODS:
-  - Alamofire (4.7.3)
-  - AlamofireObjectMapper (5.1.0):
-    - Alamofire (~> 4.1)
-    - ObjectMapper (~> 3.3)
+  - Alamofire (4.8.1)
+  - AlamofireObjectMapper (5.2.0):
+    - Alamofire (~> 4.7)
+    - ObjectMapper (~> 3.4)
   - Eureka (4.2.0)
-  - Firebase/Core (5.8.1):
+  - Firebase/Core (5.16.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 5.1.4)
-  - Firebase/CoreOnly (5.8.1):
-    - FirebaseCore (= 5.1.3)
-  - Firebase/Messaging (5.8.1):
+    - FirebaseAnalytics (= 5.5.0)
+  - Firebase/CoreOnly (5.16.0):
+    - FirebaseCore (= 5.2.0)
+  - Firebase/Messaging (5.16.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (= 3.1.2)
-  - FirebaseAnalytics (5.1.4):
-    - FirebaseCore (~> 5.1)
-    - FirebaseInstanceID (~> 3.2)
-    - GoogleAppMeasurement (~> 5.1)
+    - FirebaseMessaging (= 3.3.0)
+  - FirebaseAnalytics (5.5.0):
+    - FirebaseCore (~> 5.2)
+    - FirebaseInstanceID (~> 3.4)
+    - GoogleAppMeasurement (= 5.5.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
-  - FirebaseCore (5.1.3):
+  - FirebaseAnalyticsInterop (1.1.0)
+  - FirebaseCore (5.2.0):
     - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseInstanceID (3.2.1):
-    - FirebaseCore (~> 5.1)
+  - FirebaseInstanceID (3.4.0):
+    - FirebaseCore (~> 5.2)
+    - GoogleUtilities/Environment (~> 5.3)
+    - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseMessaging (3.3.0):
+    - FirebaseAnalyticsInterop (~> 1.1)
+    - FirebaseCore (~> 5.2)
+    - FirebaseInstanceID (~> 3.4)
     - GoogleUtilities/Environment (~> 5.2)
-  - FirebaseMessaging (3.1.2):
-    - FirebaseCore (~> 5.0)
-    - FirebaseInstanceID (~> 3.0)
     - GoogleUtilities/Reachability (~> 5.2)
     - Protobuf (~> 3.1)
-  - GoogleAppMeasurement (5.1.4):
+  - GoogleAppMeasurement (5.5.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
-  - GoogleUtilities/AppDelegateSwizzler (5.3.0):
+  - GoogleUtilities/AppDelegateSwizzler (5.3.7):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (5.3.0)
-  - GoogleUtilities/Logger (5.3.0):
+  - GoogleUtilities/Environment (5.3.7)
+  - GoogleUtilities/Logger (5.3.7):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (5.3.0):
+  - GoogleUtilities/MethodSwizzler (5.3.7):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (5.3.0):
+  - GoogleUtilities/Network (5.3.7):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (5.3.0)"
-  - GoogleUtilities/Reachability (5.3.0):
+  - "GoogleUtilities/NSData+zlib (5.3.7)"
+  - GoogleUtilities/Reachability (5.3.7):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (5.3.7):
     - GoogleUtilities/Logger
   - ImageRow (3.1.0):
     - Eureka (~> 4.0)
-  - KeychainSwift (12.0.0)
-  - nanopb (0.3.8):
-    - nanopb/decode (= 0.3.8)
-    - nanopb/encode (= 0.3.8)
-  - nanopb/decode (0.3.8)
-  - nanopb/encode (0.3.8)
-  - NVActivityIndicatorView (4.4.0):
-    - NVActivityIndicatorView/Presenter (= 4.4.0)
-  - NVActivityIndicatorView/Presenter (4.4.0)
-  - ObjectMapper (3.3.0)
+  - KeychainSwift (13.0.0)
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
+  - NVActivityIndicatorView (4.6.1):
+    - NVActivityIndicatorView/Presenter (= 4.6.1)
+  - NVActivityIndicatorView/Presenter (4.6.1)
+  - ObjectMapper (3.4.2)
   - Protobuf (3.6.1)
-  - SwiftyBeaver (1.6.1)
+  - SwiftyBeaver (1.6.2)
   - TextFieldEffects (1.4.0)
 
 DEPENDENCIES:
@@ -88,6 +94,7 @@ SPEC REPOS:
     - Eureka
     - Firebase
     - FirebaseAnalytics
+    - FirebaseAnalyticsInterop
     - FirebaseCore
     - FirebaseInstanceID
     - FirebaseMessaging
@@ -103,23 +110,24 @@ SPEC REPOS:
     - TextFieldEffects
 
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AlamofireObjectMapper: 3395e698901d8b0e6f48b7d0c43bd47875325102
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
   Eureka: 0748c7bbb2560130e43c7bfa83e99c98854a1f42
-  Firebase: a870ed114d769b424021a0c8ddb0c86c3250a0c5
-  FirebaseAnalytics: 361594968a84a04d9598ef0f2e769d3735cd03de
-  FirebaseCore: 27bd80e5bfaaf9552a1f5cacb4c7e8bb925bab22
-  FirebaseInstanceID: ea5af6920d0a4a29b40459d055bebe4a6c1333c4
-  FirebaseMessaging: d6feeb06218d2675b4149b0ada925a6b707a74cf
-  GoogleAppMeasurement: 7d2552cea4e12d09ce737ef0441887a746585ff3
-  GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
+  Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
+  FirebaseAnalytics: d35d47c03c50c73c14a7fd31463c5775843e78a9
+  FirebaseAnalyticsInterop: e5f21be9af6548372e2f0815834ff909bff395a2
+  FirebaseCore: ea2d1816723ef21492b8e9113303e1350db5e08c
+  FirebaseInstanceID: 97ea7a5dca9afd72c79bfcdddb7a44aa1cbb42a1
+  FirebaseMessaging: acbd51fe1a172bf29abaaa6e93a60f98bbf8e4f9
+  GoogleAppMeasurement: 621f3bc6211d5ba548debe01fafad30cf5ab6859
+  GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   ImageRow: 1ea483078bfa3d880a7fc76fdfcddfd5f29a9e6b
-  KeychainSwift: d5e776578587ee5958ce36601df22f168f65138a
-  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  NVActivityIndicatorView: ec7440a57af2450319d3a4181cca7da6fc127064
-  ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
+  KeychainSwift: 23d6c16cbc33f20fafa30c3d783241b4b87d998c
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  NVActivityIndicatorView: 4ca19fccc84595a78957336a086d00a49be6ce61
+  ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
+  SwiftyBeaver: 8e67ab3cd94389cbbb7a9c7cc02748d98bfee68e
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
 
 PODFILE CHECKSUM: 4cfaf803ceaad37d7e386e9ac08aebfd156292af
