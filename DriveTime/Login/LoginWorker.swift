@@ -28,7 +28,7 @@ class LoginWorker {
     private let BASE_URL = "https://www.prodrivetime.com/api/mobileApi/mobileDriverLogin"
     private let USERNAME_API_PARAM = "email"
     private let PASSWORD_API_PARAM = "password"
-    private let FIREBASE_TOKEN_PARAM = "token"
+    private let FIREBASE_TOKEN_PARAM = "firebaseToken"
 
     func fetchUserData(payload: Login.FetchUserData.Request, completionHandler: @escaping (Login.FetchUserData.Response?, LoginError?) -> Void) {
         

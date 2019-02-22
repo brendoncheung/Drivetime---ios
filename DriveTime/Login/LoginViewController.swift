@@ -13,6 +13,7 @@
 import UIKit
 import NVActivityIndicatorView
 
+
 protocol LoginDisplayLogic: class {
     
     func presentLoginErrorDialog(error: String)
@@ -45,6 +46,7 @@ class LoginViewController: UIViewController {
         loginView.setDelegate(delegate: self)
         setup()
         uisetup()
+        
     }
     
     private func setup() {
@@ -56,6 +58,8 @@ class LoginViewController: UIViewController {
         presenter.viewController = self
         router.viewController = self
         viewController.interactor = interactor
+        
+        
         
     }
     
@@ -149,6 +153,7 @@ extension LoginViewController: LoginDisplayLogic {
 extension LoginViewController: LoginDelegate {
     
     func login(username: String?, password: String?) {
+        
         LoadingScreenUtils.startLoadingScreen(toAnimate: true, loadingScreen: blurLoadingScreen, loadingIcon: loadingIcon)
         let loginCredential = Login.FetchUserData.Request(email: username, password: password)
         interactor?.fetchLoginData(request: loginCredential)

@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
         
         UIApplication.shared.applicationIconBadgeNumber = 0
+        
         // Override point for customization after application launch.
         loggingWithSwitftyBeaverConfiguration()
         
@@ -37,22 +38,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 log.debug("User granted push notification")
                 UNUserNotificationCenter.current().delegate = self
                 Messaging.messaging().delegate = self
+                
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
-                
                 
             } else {
                 log.debug("User did not grant pn")
             }
         }
-
+        
         return true
     }
-    
-    
-    
-    
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         log.debug("Device token receiving failed because: \(error.localizedDescription)")
@@ -62,7 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let token = deviceToken.map {String(format: "%02.2hhx", $0)}.joined()
         log.debug("Token: \(token)")
-        Messaging.messaging().setAPNSToken(deviceToken, type: MessagingAPNSTokenType.prod)
+        Messaging.messaging().apnsToken = deviceToken
+
+        //Messaging.messaging().setAPNSToken(deviceToken, type: MessagingAPNSTokenType.prod)
     }
     
     
@@ -92,10 +91,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         UIApplication.shared.applicationIconBadgeNumber += 1
-        
         print("push notification received")
-
     }
-    
 }
+
+
+
+
+
+
+
+
 

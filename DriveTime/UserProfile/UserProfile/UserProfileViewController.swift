@@ -30,9 +30,9 @@ class UserProfileViewController: UIViewController, OnUserProfileChangeDidTouch {
     }
     
     func onUserProfileChangeDidTouch() {
-        if let url = URL(string: DRIVE_TIME_URL) {
-            UIApplication.shared.open(url, options: [:])
-        }
+        let alert = UIAlertController(title: "User profile", message: "Please login to www.prodrivetime.com to change your user profile", preferredStyle: .alert)
+        
+        let alertAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
     }
     
     @objc func pushJobRequestViewController() {
